@@ -1,0 +1,362 @@
+
+<style>
+.t-nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.25rem}
+.t-btn{padding:6px 13px;border-radius:20px;border:0.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-secondary);font-size:12px;cursor:pointer;transition:all .12s;display:flex;align-items:center;gap:5px}
+.t-btn.on{background:var(--color-background-info);color:var(--color-text-info);border-color:var(--color-border-info);font-weight:500}
+.t-btn:hover:not(.on){background:var(--color-background-secondary);color:var(--color-text-primary)}
+.panel{display:none}.panel.on{display:block}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:10px}
+.c-title{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:12px;display:flex;align-items:center;gap:7px}
+.tip{background:var(--color-background-warning);border-left:3px solid var(--color-border-warning);border-radius:0;padding:9px 12px;margin:10px 0;font-size:12px;color:var(--color-text-warning);line-height:1.6}
+.ex{background:var(--color-background-info);border-left:3px solid var(--color-border-info);border-radius:0;padding:9px 12px;margin:8px 0;font-size:12px;font-family:var(--font-mono);color:var(--color-text-info);line-height:1.75}
+.fml{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:9px 12px;margin:8px 0;font-size:12px;font-family:var(--font-mono);color:var(--color-text-primary);line-height:1.75}
+.clist{margin:0;padding:0;list-style:none}
+.ci{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:13px}
+.ci:last-child{border-bottom:none;padding-bottom:0}.ci:first-child{padding-top:0}
+.b{font-size:11px;padding:3px 9px;border-radius:10px;font-weight:500;white-space:nowrap;flex-shrink:0}
+.bi{background:var(--color-background-info);color:var(--color-text-info)}
+.bs{background:var(--color-background-success);color:var(--color-text-success)}
+.bw{background:var(--color-background-warning);color:var(--color-text-warning)}
+.bd{background:var(--color-background-danger);color:var(--color-text-danger)}
+.cd{color:var(--color-text-primary);line-height:1.55}
+.cs{color:var(--color-text-secondary);font-size:12px;margin-top:2px;font-family:var(--font-mono)}
+.tt{width:100%;border-collapse:collapse;font-size:12px}
+.tt th{text-align:left;padding:8px 10px;background:var(--color-background-secondary);border-bottom:0.5px solid var(--color-border-secondary);font-weight:500;color:var(--color-text-secondary)}
+.tt td{padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top;color:var(--color-text-primary);line-height:1.45}
+.tt tr:last-child td{border-bottom:none}
+.sl{font-size:12px;font-weight:500;color:var(--color-text-secondary);margin:12px 0 6px}
+.p{font-size:13px;color:var(--color-text-primary);margin:5px 0;line-height:1.6}
+.imp-badge{display:inline-flex;align-items:center;gap:4px;background:var(--color-background-danger);color:var(--color-text-danger);border-radius:var(--border-radius-md);padding:4px 10px;font-size:11px;font-weight:500;margin-bottom:10px}
+</style>
+
+<h2 class="sr-only">DBMS Complete Study Guide for UGC NET JRF Computer Science Exam</h2>
+<div style="padding:0.5rem 0">
+
+<div class="t-nav">
+  <button class="t-btn on" onclick="sw('keys',this)"><i class="ti ti-key" aria-hidden="true"></i> Keys & FDs</button>
+  <button class="t-btn" onclick="sw('norm',this)"><i class="ti ti-filter" aria-hidden="true"></i> Normalization</button>
+  <button class="t-btn" onclick="sw('ra',this)"><i class="ti ti-math-function" aria-hidden="true"></i> Rel. Algebra</button>
+  <button class="t-btn" onclick="sw('sql',this)"><i class="ti ti-database" aria-hidden="true"></i> SQL</button>
+  <button class="t-btn" onclick="sw('txn',this)"><i class="ti ti-refresh" aria-hidden="true"></i> Transactions</button>
+  <button class="t-btn" onclick="sw('er',this)"><i class="ti ti-hierarchy" aria-hidden="true"></i> ER Model</button>
+  <button class="t-btn" onclick="sw('idx',this)"><i class="ti ti-list-search" aria-hidden="true"></i> Indexing</button>
+</div>
+
+<div class="panel on" id="keys">
+  <div class="card">
+    <div class="c-title"><i class="ti ti-key" aria-hidden="true"></i> Types of Keys</div>
+    <ul class="clist">
+      <li class="ci"><span class="b bi">Super Key</span><div><div class="cd">Any set of attributes that can uniquely identify every row. May have extra attributes.</div><div class="cs">R(A,B,C,D): {A,B}, {A,B,C}, {A,B,C,D} are all super keys</div></div></li>
+      <li class="ci"><span class="b bs">Candidate Key</span><div><div class="cd">Minimal super key — no proper subset of it is also a super key. A relation can have multiple CKs.</div><div class="cs">If {A,B} is a CK, then {A} or {B} alone cannot uniquely identify rows</div></div></li>
+      <li class="ci"><span class="b bw">Primary Key</span><div><div class="cd">One candidate key chosen as the main identifier. Cannot have NULL values. Other CKs become alternate keys.</div></div></li>
+      <li class="ci"><span class="b bd">Foreign Key</span><div><div class="cd">References the primary key of another relation. Enforces referential integrity. Can contain NULLs.</div><div class="cs">R.A references S.A (R = child/referencing, S = parent/referenced)</div></div></li>
+    </ul>
+    <div class="tip"><i class="ti ti-bulb" aria-hidden="true"></i> <strong>Key Rule:</strong> Every CK is a super key, but NOT every super key is a CK. An attribute that never appears on the RHS of any FD MUST be part of every candidate key.</div>
+  </div>
+  <div class="card">
+    <div class="c-title"><i class="ti ti-arrows-right-left" aria-hidden="true"></i> Functional Dependencies</div>
+    <p class="p">X → Y means: any two tuples with the same X values must have the same Y values.</p>
+    <div class="sl">Trivial vs Non-trivial</div>
+    <ul class="clist">
+      <li class="ci"><span class="b bi">Trivial FD</span><div><div class="cd">X → Y where Y ⊆ X. Always holds. E.g., <span style="font-family:var(--font-mono)">AB → A</span>, <span style="font-family:var(--font-mono)">ABC → BC</span></div></div></li>
+      <li class="ci"><span class="b bs">Non-trivial FD</span><div><div class="cd">X → Y where Y ⊄ X. E.g., <span style="font-family:var(--font-mono)">A → B</span>, <span style="font-family:var(--font-mono)">AB → CD</span>. These are useful for normalization.</div></div></li>
+    </ul>
+    <div class="sl">Armstrong's Axioms (Sound and Complete)</div>
+    <div class="fml">1. Reflexivity:      Y ⊆ X  ⟹  X → Y
+2. Augmentation:    X → Y  ⟹  XZ → YZ
+3. Transitivity:    X→Y, Y→Z  ⟹  X → Z
+── Derived Rules ──────────────────────
+4. Union:           X→Y, X→Z  ⟹  X → YZ
+5. Decomposition:   X → YZ  ⟹  X→Y and X→Z
+6. Pseudotransitivity: X→Y, WY→Z  ⟹  WX → Z</div>
+    <div class="sl">Finding Attribute Closure X⁺ — used to check if X is a candidate key</div>
+    <p class="p">Start with X⁺ = {X}. Repeatedly apply FDs to expand until no further expansion is possible.</p>
+    <div class="ex">R(A,B,C,D,E),  FDs: A→BC,  CD→E,  B→D,  E→A
+
+Compute A⁺:
+  Start:    {A}
+  A→BC:     {A, B, C}
+  B→D:      {A, B, C, D}
+  CD→E:     {A, B, C, D, E}  ← all attributes covered
+
+∴ A⁺ = {A,B,C,D,E} → A is a Candidate Key ✓</div>
+    <div class="tip"><i class="ti ti-bulb" aria-hidden="true"></i> <strong>Exam Strategy:</strong> To find ALL candidate keys, compute closure for every attribute and every combination. If closure = all attributes, it's a candidate key. If a strict subset also gives all attributes, then it's not minimal — discard it.</div>
+  </div>
+</div>
+
+<div class="panel" id="norm">
+  <div class="card">
+    <div class="c-title"><i class="ti ti-filter" aria-hidden="true"></i> Normal Forms</div>
+    <table class="tt">
+      <tr><th>NF</th><th>Condition</th><th>Removes</th></tr>
+      <tr><td><span class="b bi">1NF</span></td><td>All attributes are atomic (indivisible). No repeating groups or set-valued attributes.</td><td>Multi-valued, composite attributes</td></tr>
+      <tr><td><span class="b bs">2NF</span></td><td>In 1NF + every non-prime attribute is fully functionally dependent on the entire candidate key.</td><td>Partial dependencies</td></tr>
+      <tr><td><span class="b bw">3NF</span></td><td>In 2NF + no non-prime attribute transitively depends on any candidate key.</td><td>Transitive dependencies</td></tr>
+      <tr><td><span class="b bd">BCNF</span></td><td>For every non-trivial FD X→Y, X must be a super key. Stricter than 3NF.</td><td>All FDs where LHS is not a super key</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <div class="c-title">Key Definitions for Normalization</div>
+    <ul class="clist">
+      <li class="ci"><span class="b bs">Prime Attr</span><div class="cd">An attribute that belongs to at least one candidate key.</div></li>
+      <li class="ci"><span class="b bd">Non-Prime Attr</span><div class="cd">An attribute that does NOT appear in any candidate key.</div></li>
+      <li class="ci"><span class="b bw">Partial Dep</span><div><div class="cd">A non-prime attribute depends on only a PART of a composite candidate key.</div><div class="cs">R(A,B,C,D); CK={A,B}; if A→C then C partially depends on {A,B}</div></div></li>
+      <li class="ci"><span class="b bi">Transitive Dep</span><div><div class="cd">A non-prime attr A determines another non-prime attr B: CK → A → B (indirect dependency).</div><div class="cs">EmpID → DeptID → DeptName : DeptName has transitive dependency on EmpID</div></div></li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="c-title">BCNF vs 3NF — Most Tested Difference</div>
+    <div class="fml">3NF: X → Y is allowed if:
+  (a) X is a super key,  OR
+  (b) Y is a prime attribute (part of some CK)
+
+BCNF: X → Y is allowed ONLY if:
+  (a) X is a super key  (no exceptions!)</div>
+    <div class="ex">R(A, B, C),   FDs: AB→C,  C→B
+Candidate Keys: {A,B}  and  {A,C}
+Prime attributes: A, B, C  (ALL are prime here!)
+
+Check FD  C → B:
+  Is C a super key?        NO  (C⁺ = {B,C} ≠ all)
+  Is B a prime attribute?  YES (B ∈ CK {A,B})
+
+Conclusion: In 3NF ✓   but   NOT in BCNF ✗
+(This exact example appears repeatedly in UGC NET!)</div>
+    <div class="tip"><i class="ti ti-bulb" aria-hidden="true"></i> <strong>Preservation:</strong> BCNF guarantees lossless-join decomposition but may NOT preserve all FDs. 3NF guarantees BOTH lossless-join AND dependency preservation. This distinction is asked very frequently in UGC NET.</div>
+  </div>
+  <div class="card">
+    <div class="c-title">Quick Decision Rule for Any FD X→Y</div>
+    <div class="fml">For each non-trivial FD X → Y:
+│
+├── Is X a SUPER KEY?
+│   ├── YES → BCNF ✓  (also 3NF ✓)
+│   └── NO  →
+│       └── Is every attr in Y a PRIME attribute?
+│           ├── YES → 3NF ✓  (NOT in BCNF)
+│           └── NO  → Not even in 3NF ✗</div>
+  </div>
+</div>
+
+<div class="panel" id="ra">
+  <div class="card">
+    <div class="c-title"><i class="ti ti-math-function" aria-hidden="true"></i> Core Operations</div>
+    <table class="tt">
+      <tr><th>Operation</th><th>Symbol</th><th>Description</th><th>Example</th></tr>
+      <tr><td><span class="b bi">Selection</span></td><td style="font-family:var(--font-mono)">σ</td><td>Filter rows by condition (like SQL WHERE)</td><td style="font-family:var(--font-mono);font-size:11px">σ<sub>age>20</sub>(R)</td></tr>
+      <tr><td><span class="b bs">Projection</span></td><td style="font-family:var(--font-mono)">π</td><td>Pick specific columns; removes duplicate rows</td><td style="font-family:var(--font-mono);font-size:11px">π<sub>name,age</sub>(R)</td></tr>
+      <tr><td><span class="b bw">Union</span></td><td style="font-family:var(--font-mono)">∪</td><td>All rows from both (must be union-compatible)</td><td style="font-family:var(--font-mono);font-size:11px">R ∪ S</td></tr>
+      <tr><td><span class="b bd">Difference</span></td><td style="font-family:var(--font-mono)">−</td><td>Rows in R but NOT in S</td><td style="font-family:var(--font-mono);font-size:11px">R − S</td></tr>
+      <tr><td><span class="b bi">Intersection</span></td><td style="font-family:var(--font-mono)">∩</td><td>Common rows in both R and S</td><td style="font-family:var(--font-mono);font-size:11px">R ∩ S</td></tr>
+      <tr><td><span class="b bs">Cartesian Prod</span></td><td style="font-family:var(--font-mono)">×</td><td>All row combinations — if |R|=m, |S|=n → m×n rows</td><td style="font-family:var(--font-mono);font-size:11px">R × S</td></tr>
+      <tr><td><span class="b bw">Natural Join</span></td><td style="font-family:var(--font-mono)">⋈</td><td>Joins on all common attributes; removes duplicate cols</td><td style="font-family:var(--font-mono);font-size:11px">R ⋈ S</td></tr>
+      <tr><td><span class="b bd">Division</span></td><td style="font-family:var(--font-mono)">÷</td><td>R÷S: tuples in R that relate to ALL tuples in S</td><td style="font-family:var(--font-mono);font-size:11px">R ÷ S</td></tr>
+      <tr><td><span class="b bi">Rename</span></td><td style="font-family:var(--font-mono)">ρ</td><td>Rename relation or attribute names</td><td style="font-family:var(--font-mono);font-size:11px">ρ<sub>T(a,b)</sub>(R)</td></tr>
+    </table>
+    <div class="tip"><i class="ti ti-bulb" aria-hidden="true"></i> <strong>Union Compatibility:</strong> R and S must have the same number of attributes AND compatible domains for ∪, ∩, − operations. Natural join requires same-named attributes to be of same type.</div>
+  </div>
+  <div class="card">
+    <div class="c-title">Division Operation — "for all" queries</div>
+    <p class="p">R ÷ S gives tuples in R that are associated with ALL tuples in S. Used for queries like "find students who enrolled in ALL courses."</p>
+    <div class="ex">R(Student, Course),   S(Course) = {DBMS, OS, CN}
+
+R ÷ S = students who took ALL three courses
+
+Equivalent expression:
+R ÷ S = π_x(R) − π_x( (π_x(R) × S) − R )
+  where x = attributes in R not in S = {Student}</div>
+  </div>
+  <div class="card">
+    <div class="c-title">Tuple Count Formulas</div>
+    <div class="fml">R has m tuples, S has n tuples:
+• R × S        → exactly m × n tuples
+• R ∪ S        → max(m,n)  to  m+n  tuples
+• R ∩ S        → 0  to  min(m,n)  tuples
+• R − S        → max(0, m−n)  to  m  tuples
+• R ⋈ S (Natural Join) → 0  to  m×n  tuples
+• σ_cond(R)   → 0  to  m  tuples</div>
+  </div>
+</div>
+
+<div class="panel" id="sql">
+  <div class="card">
+    <div class="c-title"><i class="ti ti-database" aria-hidden="true"></i> SQL Execution Order</div>
+    <div class="fml">1. FROM      → Identify and load tables
+2. JOIN      → Combine tables (if any)
+3. WHERE     → Filter individual rows (no aggregates here!)
+4. GROUP BY  → Group rows by specified columns
+5. HAVING    → Filter groups (aggregates allowed here)
+6. SELECT    → Pick columns, apply functions/aliases
+7. ORDER BY  → Sort the results
+8. LIMIT     → Restrict number of output rows</div>
+    <div class="tip"><i class="ti ti-bulb" aria-hidden="true"></i> <strong>Critical Exam Point:</strong> WHERE executes BEFORE GROUP BY — you cannot use aggregate functions (COUNT, SUM, AVG) in WHERE. Use HAVING to filter aggregated results. WHERE filters rows; HAVING filters groups.</div>
+  </div>
+  <div class="card">
+    <div class="c-title">SQL Joins</div>
+    <div class="fml">INNER JOIN       → Only matching rows from both tables
+LEFT OUTER JOIN  → ALL from left + NULLs for non-matches in right
+RIGHT OUTER JOIN → ALL from right + NULLs for non-matches in left
+FULL OUTER JOIN  → ALL rows from both (NULLs where no match)
+CROSS JOIN       → Cartesian product (no condition)
+NATURAL JOIN     → Auto-joins on column(s) with same name</div>
+  </div>
+  <div class="card">
+    <div class="c-title">Subqueries</div>
+    <table class="tt">
+      <tr><th>Type</th><th>Description</th><th>Performance</th></tr>
+      <tr><td><span class="b bi">Correlated</span></td><td>Inner query references outer query column — re-executes for each outer row</td><td>Slower (n executions)</td></tr>
+      <tr><td><span class="b bs">Non-correlated</span></td><td>Inner query is independent of outer — executes only once</td><td>Faster (1 execution)</td></tr>
+      <tr><td><span class="b bw">EXISTS</span></td><td>True if subquery returns at least one row. Stops on first match.</td><td>Fast for large sets</td></tr>
+      <tr><td><span class="b bd">IN</span></td><td>Tests if value is in subquery result set. Beware: NULL in list can affect results.</td><td>Moderate</td></tr>
+      <tr><td><span class="b bi">ALL</span></td><td>Condition must hold for ALL values in subquery. x > ALL(q) ≡ x > MAX(q)</td><td></td></tr>
+      <tr><td><span class="b bs">ANY/SOME</span></td><td>Condition holds for at least one value. x > ANY(q) ≡ x > MIN(q)</td><td></td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <div class="c-title">SQL Command Types</div>
+    <table class="tt">
+      <tr><th>Type</th><th>Commands</th><th>Key Property</th></tr>
+      <tr><td><span class="b bi">DDL</span></td><td>CREATE, ALTER, DROP, TRUNCATE, RENAME</td><td>Auto-committed; cannot be rolled back</td></tr>
+      <tr><td><span class="b bs">DML</span></td><td>SELECT, INSERT, UPDATE, DELETE</td><td>Can be rolled back; fires triggers</td></tr>
+      <tr><td><span class="b bw">DCL</span></td><td>GRANT, REVOKE</td><td>Controls access privileges</td></tr>
+      <tr><td><span class="b bd">TCL</span></td><td>COMMIT, ROLLBACK, SAVEPOINT</td><td>Manages transaction boundaries</td></tr>
+    </table>
+    <div class="tip"><i class="ti ti-bulb" aria-hidden="true"></i> <strong>TRUNCATE vs DELETE:</strong> TRUNCATE is DDL — auto-commits, cannot rollback, resets identity/sequence, much faster. DELETE is DML — can rollback, fires row-level triggers, supports WHERE clause. Both remove rows but behave very differently!</div>
+  </div>
+</div>
+
+<div class="panel" id="txn">
+  <div class="card">
+    <div class="c-title"><i class="ti ti-refresh" aria-hidden="true"></i> ACID Properties</div>
+    <table class="tt">
+      <tr><th>Property</th><th>Meaning</th><th>Guaranteed By</th></tr>
+      <tr><td><span class="b bi">Atomicity</span></td><td>All operations in a transaction execute completely, or none at all (all-or-nothing).</td><td>Transaction Manager + Logging</td></tr>
+      <tr><td><span class="b bs">Consistency</span></td><td>DB moves from one valid state to another; all integrity constraints satisfied.</td><td>Application code + DBMS constraints</td></tr>
+      <tr><td><span class="b bw">Isolation</span></td><td>Concurrent transactions appear to execute serially; no interference.</td><td>Concurrency Control (2PL etc.)</td></tr>
+      <tr><td><span class="b bd">Durability</span></td><td>Once committed, changes are permanent even after crash or failure.</td><td>Recovery System (WAL logging)</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <div class="c-title">Concurrency Problems</div>
+    <ul class="clist">
+      <li class="ci"><span class="b bd">Dirty Read</span><div class="cd">T1 reads uncommitted data from T2. If T2 aborts, T1 has used invalid data.</div></li>
+      <li class="ci"><span class="b bw">Lost Update</span><div class="cd">T1 and T2 both read X, update it. T2's write overwrites T1's update — T1's work is lost.</div></li>
+      <li class="ci"><span class="b bi">Non-repeatable Read</span><div class="cd">T1 reads same row twice; T2 modifies it in between → T1 gets different values on second read.</div></li>
+      <li class="ci"><span class="b bs">Phantom Read</span><div class="cd">T1 runs same query twice; T2 inserts/deletes matching rows in between → T1 sees different set of rows (phantom rows).</div></li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="c-title">Serializability</div>
+    <ul class="clist">
+      <li class="ci"><span class="b bi">Conflict</span><div><div class="cd">Two operations conflict if: from different transactions, on same data item, and at least one is WRITE.</div><div class="cs">R-W, W-R, W-W conflict.  R-R does NOT conflict.</div></div></li>
+      <li class="ci"><span class="b bs">Conflict Serializable</span><div class="cd">Schedule can be transformed to a serial schedule by swapping non-conflicting adjacent operations.</div></li>
+      <li class="ci"><span class="b bw">Precedence Graph</span><div><div class="cd">Draw edge Ti→Tj if Ti has a conflicting op before Tj on the same data item.</div><div class="cs">Schedule is conflict serializable ⟺ Precedence graph is acyclic (DAG)</div></div></li>
+      <li class="ci"><span class="b bd">View Serializable</span><div class="cd">Broader than conflict. Every conflict-serializable schedule is view-serializable, but NOT vice versa. Checking is NP-complete.</div></li>
+    </ul>
+    <div class="tip"><i class="ti ti-bulb" aria-hidden="true"></i> <strong>Hierarchy:</strong> Conflict Serializable ⊂ View Serializable ⊂ All Serializable schedules. In practice, only conflict serializability is checked (via precedence graph). Acyclic = serializable.</div>
+  </div>
+  <div class="card">
+    <div class="c-title">Two-Phase Locking (2PL)</div>
+    <div class="fml">Phase 1 (Growing):   Only ACQUIRE locks — no releasing allowed
+Phase 2 (Shrinking):  Only RELEASE locks — no acquiring allowed
+Lock Point = moment of last lock acquisition
+
+Variants:
+• Basic 2PL:    May cause cascading rollbacks
+• Strict 2PL:   Hold WRITE locks until commit/abort
+• Rigorous 2PL: Hold ALL locks until commit/abort (prevents cascading rollbacks)
+
+Lock compatibility:
+  Shared (S) lock  ←→ Read operation
+  Exclusive (X) lock ←→ Write operation
+  S-S: Compatible ✓    S-X: Incompatible ✗    X-X: Incompatible ✗</div>
+    <div class="tip"><i class="ti ti-bulb" aria-hidden="true"></i> 2PL guarantees conflict serializability but can cause DEADLOCKS. Deadlock handling: prevention (timestamps), detection (wait-for graph), or avoidance.</div>
+  </div>
+</div>
+
+<div class="panel" id="er">
+  <div class="card">
+    <div class="c-title"><i class="ti ti-hierarchy" aria-hidden="true"></i> ER Model Components</div>
+    <table class="tt">
+      <tr><th>Component</th><th>Symbol</th><th>Description</th></tr>
+      <tr><td><span class="b bi">Strong Entity</span></td><td>Rectangle</td><td>Exists independently; has its own key attribute.</td></tr>
+      <tr><td><span class="b bd">Weak Entity</span></td><td>Double Rectangle</td><td>Cannot exist without owner entity. Identified by partial key + owner's PK.</td></tr>
+      <tr><td><span class="b bs">Key Attribute</span></td><td>Underlined Ellipse</td><td>Uniquely identifies the entity. Becomes the primary key.</td></tr>
+      <tr><td><span class="b bw">Multivalued Attr</span></td><td>Double Ellipse</td><td>Can hold multiple values (phone numbers, skills, hobbies).</td></tr>
+      <tr><td><span class="b bi">Derived Attr</span></td><td>Dashed Ellipse</td><td>Computed from other attributes (Age from DOB, Experience from JoinDate).</td></tr>
+      <tr><td><span class="b bs">Composite Attr</span></td><td>Ellipse with sub-ellipses</td><td>Made up of multiple sub-attributes (Name = First + Middle + Last).</td></tr>
+      <tr><td><span class="b bw">Relationship</span></td><td>Diamond</td><td>Association between two or more entity sets.</td></tr>
+      <tr><td><span class="b bd">Weak Relationship</span></td><td>Double Diamond</td><td>Connects weak entity to its owner entity.</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <div class="c-title">Cardinality & ER-to-Relational Mapping</div>
+    <table class="tt">
+      <tr><th>Cardinality</th><th>Example</th><th>Mapping Rule</th></tr>
+      <tr><td><span class="b bi">1:1</span></td><td>Person — Passport</td><td>Add FK in either table, or merge both into one table.</td></tr>
+      <tr><td><span class="b bs">1:N</span></td><td>Department — Employee</td><td>Add FK on the N-side (many-side) table.</td></tr>
+      <tr><td><span class="b bw">M:N</span></td><td>Student — Course</td><td>Create a new junction/bridge table with FKs to both entities.</td></tr>
+      <tr><td><span class="b bd">Weak Entity</span></td><td>Dependent of Employee</td><td>New table with (partial key + owner's PK) as composite PK.</td></tr>
+      <tr><td><span class="b bi">Multivalued</span></td><td>Employee — PhoneNo</td><td>New table: (Entity_PK, multivalued_attribute). Both form composite PK.</td></tr>
+    </table>
+    <div class="tip"><i class="ti ti-bulb" aria-hidden="true"></i> <strong>Participation Constraint:</strong> Total participation (double line) = every entity must participate in the relationship. Partial participation (single line) = optional. Total participation on N-side of 1:N means FK cannot be NULL.</div>
+  </div>
+  <div class="card">
+    <div class="c-title">Generalization, Specialization, Aggregation</div>
+    <ul class="clist">
+      <li class="ci"><span class="b bi">Specialization</span><div><div class="cd">Top-down. Split a general entity into subclasses with additional unique attributes.</div><div class="cs">Employee → Manager, Technician, Clerk</div></div></li>
+      <li class="ci"><span class="b bs">Generalization</span><div><div class="cd">Bottom-up. Combine similar entities sharing common attributes into a superclass.</div><div class="cs">Car + Truck + Bus → Vehicle</div></div></li>
+      <li class="ci"><span class="b bw">Aggregation</span><div><div class="cd">Treat a relationship set as a higher-level entity when it must participate in another relationship.</div><div class="cs">Used when a relationship itself has relationships with other entities</div></div></li>
+    </ul>
+  </div>
+</div>
+
+<div class="panel" id="idx">
+  <div class="card">
+    <div class="c-title"><i class="ti ti-list-search" aria-hidden="true"></i> Index Types</div>
+    <table class="tt">
+      <tr><th>Type</th><th>Built On</th><th>Entries</th></tr>
+      <tr><td><span class="b bi">Primary Index</span></td><td>Ordered file, KEY field</td><td>Sparse: one entry per data block. Count = # of blocks</td></tr>
+      <tr><td><span class="b bs">Clustering Index</span></td><td>Ordered file, NON-KEY field</td><td>One entry per distinct value of indexed field</td></tr>
+      <tr><td><span class="b bw">Secondary Index</span></td><td>Unordered file or non-ordering field</td><td>Dense: one entry per record. More overhead.</td></tr>
+      <tr><td><span class="b bd">Dense Index</span></td><td>Any</td><td>One entry for EVERY record. Fast but uses more space.</td></tr>
+      <tr><td><span class="b bi">Sparse Index</span></td><td>Ordered file only</td><td>One entry per block. Less space; needs sequential scan within block.</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <div class="c-title">B-Tree vs B+ Tree</div>
+    <table class="tt">
+      <tr><th>Feature</th><th>B-Tree</th><th>B+ Tree</th></tr>
+      <tr><td>Data pointers</td><td>All nodes (internal + leaf)</td><td>Leaf nodes ONLY</td></tr>
+      <tr><td>Leaf linking</td><td>Not linked</td><td>Linked list (doubly linked)</td></tr>
+      <tr><td>Range queries</td><td>Inefficient — requires tree traversal</td><td>Very efficient — scan linked leaves</td></tr>
+      <tr><td>Search result</td><td>May end at internal node</td><td>Always reaches leaf node</td></tr>
+      <tr><td>Height</td><td>Shorter</td><td>Slightly taller</td></tr>
+      <tr><td>DBMS usage</td><td>File systems</td><td>All major DBMS (MySQL, PostgreSQL)</td></tr>
+    </table>
+    <div class="fml">B+ Tree of order m:
+• Internal node: min ⌈m/2⌉ children,  max m children
+• Leaf node:     min ⌊(m-1)/2⌋ keys,   max m-1 keys
+• Root node:     min 2 children (unless it's also a leaf)
+• All leaves at the SAME LEVEL (perfectly balanced)</div>
+    <div class="tip"><i class="ti ti-bulb" aria-hidden="true"></i> B+ Trees are the standard for DBMS indexes. Internal nodes store only keys for routing; leaf nodes store key + record pointer pairs. The linked leaf list enables efficient ORDER BY and range queries.</div>
+  </div>
+  <div class="card">
+    <div class="c-title">Hashing</div>
+    <ul class="clist">
+      <li class="ci"><span class="b bi">Static Hashing</span><div><div class="cd">Fixed number of buckets. h(key) = key mod n. Overflow via chaining (linked overflow buckets).</div><div class="cs">Problem: inefficient if data grows significantly beyond bucket capacity</div></div></li>
+      <li class="ci"><span class="b bs">Extendible Hashing</span><div><div class="cd">Dynamic. Uses a directory that doubles when a bucket splits. Global depth vs Local depth.</div></div></li>
+      <li class="ci"><span class="b bw">Linear Hashing</span><div><div class="cd">Splits buckets in a linear, predetermined order without needing a directory. Gradual growth.</div></div></li>
+    </ul>
+    <div class="tip"><i class="ti ti-bulb" aria-hidden="true"></i> <strong>Hashing vs B+ Tree:</strong> Hashing → O(1) for exact-match searches, but POOR for range queries. B+ Tree → O(log n) but excellent for range queries and ORDER BY. DBMS uses B+ Trees for indexes; hashing for hash-joins.</div>
+  </div>
+</div>
+
+</div>
+<script>
+function sw(id,el){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.t-btn').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  el.classList.add('on');
+}
+</script>
